@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="283396ddf7b548989f4573154fdf2e42" Name="Diagram1">
+        <EntityTypeShape EntityType="Database1Model.Campus" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Certification" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Courses" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Notation" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Questions" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Teacher" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="Database1Model.FK__Teacher__IdCampu__0880433F" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK__Teacher__IdCampu__09746778" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK__Teacher__IdCampu__0A688BB1" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK__Teacher__IdCerti__1F63A897" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK__Questions__CodeM__0C1BC9F9" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK__Teacher__IdCours__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK__Teacher__IdCours__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK__Teacher__IdNotat__2057CCD0" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

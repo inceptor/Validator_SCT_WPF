@@ -1,0 +1,513 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Campus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="CampusName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Certification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="NameCertification" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Grade" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="CodeMat" />
+          </Key>
+          <Property Name="CodeMat" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Notation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ListValue" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SizeList" Type="int" />
+          <Property Name="FinalNotation" Type="int" />
+        </EntityType>
+        <EntityType Name="Questions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Question" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bonus" Type="bit" />
+          <Property Name="CodeMat" Type="varchar" MaxLength="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Firstname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PromotionValidation" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="PromotionCurrent" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IdCampus" Type="int" Nullable="false" />
+          <Property Name="IdCampusWould" Type="int" Nullable="false" />
+          <Property Name="IdCampusTeach" Type="int" />
+          <Property Name="IdCoursesWould" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="IdCoursesTeach" Type="varchar" MaxLength="4" />
+          <Property Name="IdCertification" Type="int" />
+          <Property Name="IdNotation" Type="int" />
+          <Property Name="Comments" Type="text" />
+        </EntityType>
+        <Association Name="FK__Questions__CodeM__0C1BC9F9">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="CodeMat" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="CodeMat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teacher__IdCampu__0880433F">
+          <End Role="Campus" Type="Self.Campus" Multiplicity="1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="IdCampus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teacher__IdCampu__09746778">
+          <End Role="Campus" Type="Self.Campus" Multiplicity="1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="IdCampusWould" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teacher__IdCampu__0A688BB1">
+          <End Role="Campus" Type="Self.Campus" Multiplicity="0..1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="IdCampusTeach" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teacher__IdCerti__1F63A897">
+          <End Role="Certification" Type="Self.Certification" Multiplicity="0..1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Certification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="IdCertification" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teacher__IdCours__5FB337D6">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="0..1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="CodeMat" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="IdCoursesTeach" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teacher__IdCours__60A75C0F">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="CodeMat" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="IdCoursesWould" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teacher__IdNotat__2057CCD0">
+          <End Role="Notation" Type="Self.Notation" Multiplicity="0..1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Notation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="IdNotation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database1ModelStoreContainer">
+          <EntitySet Name="Campus" EntityType="Self.Campus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Certification" EntityType="Self.Certification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notation" EntityType="Self.Notation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Questions__CodeM__0C1BC9F9" Association="Self.FK__Questions__CodeM__0C1BC9F9">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teacher__IdCampu__0880433F" Association="Self.FK__Teacher__IdCampu__0880433F">
+            <End Role="Campus" EntitySet="Campus" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teacher__IdCampu__09746778" Association="Self.FK__Teacher__IdCampu__09746778">
+            <End Role="Campus" EntitySet="Campus" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teacher__IdCampu__0A688BB1" Association="Self.FK__Teacher__IdCampu__0A688BB1">
+            <End Role="Campus" EntitySet="Campus" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teacher__IdCerti__1F63A897" Association="Self.FK__Teacher__IdCerti__1F63A897">
+            <End Role="Certification" EntitySet="Certification" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teacher__IdCours__5FB337D6" Association="Self.FK__Teacher__IdCours__5FB337D6">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teacher__IdCours__60A75C0F" Association="Self.FK__Teacher__IdCours__60A75C0F">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teacher__IdNotat__2057CCD0" Association="Self.FK__Teacher__IdNotat__2057CCD0">
+            <End Role="Notation" EntitySet="Notation" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Database1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Campus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="CampusName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK__Teacher__IdCampu__0880433F" FromRole="Campus" ToRole="Teacher" />
+          <NavigationProperty Name="Teacher1" Relationship="Self.FK__Teacher__IdCampu__09746778" FromRole="Campus" ToRole="Teacher" />
+          <NavigationProperty Name="Teacher2" Relationship="Self.FK__Teacher__IdCampu__0A688BB1" FromRole="Campus" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="Certification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="NameCertification" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Grade" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK__Teacher__IdCerti__1F63A897" FromRole="Certification" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="CodeMat" />
+          </Key>
+          <Property Name="CodeMat" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Questions" Relationship="Self.FK__Questions__CodeM__0C1BC9F9" FromRole="Courses" ToRole="Questions" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK__Teacher__IdCours__5FB337D6" FromRole="Courses" ToRole="Teacher" />
+          <NavigationProperty Name="Teacher1" Relationship="Self.FK__Teacher__IdCours__60A75C0F" FromRole="Courses" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="Notation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ListValue" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SizeList" Type="Int32" />
+          <Property Name="FinalNotation" Type="Int32" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK__Teacher__IdNotat__2057CCD0" FromRole="Notation" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="Questions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Question" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Bonus" Type="Boolean" />
+          <Property Name="CodeMat" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Courses" Relationship="Self.FK__Questions__CodeM__0C1BC9F9" FromRole="Questions" ToRole="Courses" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PromotionValidation" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PromotionCurrent" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdCampus" Type="Int32" Nullable="false" />
+          <Property Name="IdCampusWould" Type="Int32" Nullable="false" />
+          <Property Name="IdCampusTeach" Type="Int32" />
+          <Property Name="IdCoursesWould" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdCoursesTeach" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="IdCertification" Type="Int32" />
+          <Property Name="IdNotation" Type="Int32" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Campus" Relationship="Self.FK__Teacher__IdCampu__0880433F" FromRole="Teacher" ToRole="Campus" />
+          <NavigationProperty Name="Campus1" Relationship="Self.FK__Teacher__IdCampu__09746778" FromRole="Teacher" ToRole="Campus" />
+          <NavigationProperty Name="Campus2" Relationship="Self.FK__Teacher__IdCampu__0A688BB1" FromRole="Teacher" ToRole="Campus" />
+          <NavigationProperty Name="Certification" Relationship="Self.FK__Teacher__IdCerti__1F63A897" FromRole="Teacher" ToRole="Certification" />
+          <NavigationProperty Name="Courses" Relationship="Self.FK__Teacher__IdCours__5FB337D6" FromRole="Teacher" ToRole="Courses" />
+          <NavigationProperty Name="Courses1" Relationship="Self.FK__Teacher__IdCours__60A75C0F" FromRole="Teacher" ToRole="Courses" />
+          <NavigationProperty Name="Notation" Relationship="Self.FK__Teacher__IdNotat__2057CCD0" FromRole="Teacher" ToRole="Notation" />
+        </EntityType>
+        <Association Name="FK__Teacher__IdCampu__0880433F">
+          <End Role="Campus" Type="Self.Campus" Multiplicity="1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="IdCampus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teacher__IdCampu__09746778">
+          <End Role="Campus" Type="Self.Campus" Multiplicity="1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="IdCampusWould" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teacher__IdCampu__0A688BB1">
+          <End Role="Campus" Type="Self.Campus" Multiplicity="0..1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="IdCampusTeach" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teacher__IdCerti__1F63A897">
+          <End Role="Certification" Type="Self.Certification" Multiplicity="0..1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Certification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="IdCertification" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Questions__CodeM__0C1BC9F9">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="CodeMat" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="CodeMat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teacher__IdCours__5FB337D6">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="0..1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="CodeMat" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="IdCoursesTeach" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teacher__IdCours__60A75C0F">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="CodeMat" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="IdCoursesWould" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teacher__IdNotat__2057CCD0">
+          <End Role="Notation" Type="Self.Notation" Multiplicity="0..1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Notation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="IdNotation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database1Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Campus" EntityType="Self.Campus" />
+          <EntitySet Name="Certification" EntityType="Self.Certification" />
+          <EntitySet Name="Courses" EntityType="Self.Courses" />
+          <EntitySet Name="Notation" EntityType="Self.Notation" />
+          <EntitySet Name="Questions" EntityType="Self.Questions" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" />
+          <AssociationSet Name="FK__Teacher__IdCampu__0880433F" Association="Self.FK__Teacher__IdCampu__0880433F">
+            <End Role="Campus" EntitySet="Campus" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teacher__IdCampu__09746778" Association="Self.FK__Teacher__IdCampu__09746778">
+            <End Role="Campus" EntitySet="Campus" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teacher__IdCampu__0A688BB1" Association="Self.FK__Teacher__IdCampu__0A688BB1">
+            <End Role="Campus" EntitySet="Campus" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teacher__IdCerti__1F63A897" Association="Self.FK__Teacher__IdCerti__1F63A897">
+            <End Role="Certification" EntitySet="Certification" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Questions__CodeM__0C1BC9F9" Association="Self.FK__Questions__CodeM__0C1BC9F9">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teacher__IdCours__5FB337D6" Association="Self.FK__Teacher__IdCours__5FB337D6">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teacher__IdCours__60A75C0F" Association="Self.FK__Teacher__IdCours__60A75C0F">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teacher__IdNotat__2057CCD0" Association="Self.FK__Teacher__IdNotat__2057CCD0">
+            <End Role="Notation" EntitySet="Notation" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="Database1Entities1">
+          <EntitySetMapping Name="Campus">
+            <EntityTypeMapping TypeName="Database1Model.Campus">
+              <MappingFragment StoreEntitySet="Campus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CampusName" ColumnName="CampusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Certification">
+            <EntityTypeMapping TypeName="Database1Model.Certification">
+              <MappingFragment StoreEntitySet="Certification">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NameCertification" ColumnName="NameCertification" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="Database1Model.Courses">
+              <MappingFragment StoreEntitySet="Courses">
+                <ScalarProperty Name="CodeMat" ColumnName="CodeMat" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notation">
+            <EntityTypeMapping TypeName="Database1Model.Notation">
+              <MappingFragment StoreEntitySet="Notation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ListValue" ColumnName="ListValue" />
+                <ScalarProperty Name="SizeList" ColumnName="SizeList" />
+                <ScalarProperty Name="FinalNotation" ColumnName="FinalNotation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="Database1Model.Questions">
+              <MappingFragment StoreEntitySet="Questions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Bonus" ColumnName="Bonus" />
+                <ScalarProperty Name="CodeMat" ColumnName="CodeMat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teacher">
+            <EntityTypeMapping TypeName="Database1Model.Teacher">
+              <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="PromotionValidation" ColumnName="PromotionValidation" />
+                <ScalarProperty Name="PromotionCurrent" ColumnName="PromotionCurrent" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IdCampus" ColumnName="IdCampus" />
+                <ScalarProperty Name="IdCampusWould" ColumnName="IdCampusWould" />
+                <ScalarProperty Name="IdCampusTeach" ColumnName="IdCampusTeach" />
+                <ScalarProperty Name="IdCoursesWould" ColumnName="IdCoursesWould" />
+                <ScalarProperty Name="IdCoursesTeach" ColumnName="IdCoursesTeach" />
+                <ScalarProperty Name="IdCertification" ColumnName="IdCertification" />
+                <ScalarProperty Name="IdNotation" ColumnName="IdNotation" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

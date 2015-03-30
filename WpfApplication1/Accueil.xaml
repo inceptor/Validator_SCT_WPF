@@ -1,0 +1,23 @@
+﻿<Page x:Class="WpfApplication1.Page1"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:wpfApplication1="clr-namespace:WpfApplication1"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="400"
+	Title="Page1">
+
+    <Grid Background="White" HorizontalAlignment="Center" >
+    <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock HorizontalAlignment="Center" Foreground="OrangeRed" Margin="218,10,218,369">WELCOME TO THE VALIDATOR</TextBlock>
+        <Button HorizontalAlignment="center"  x:Name="Trainer"   Click="Trainer_Click" Width="100" Height="50" Background="Blue"  Content="Trainer" Margin="250,36,250,314"/>
+        <Button HorizontalAlignment="center"  x:Name="Question" Click="Question_Click"  Width="100" Height="50" Background="Red" Content="Questions" Margin="250,112,250,238"/>
+        <Button HorizontalAlignment="center" x:Name="Validation"   Click="Validation_Click"  Width="100" Height="50" Background="Green" Content="Validation" Margin="250,187,250,163" />
+    </Grid>
+</Page>
